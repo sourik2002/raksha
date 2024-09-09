@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Floating Chatbot Styles */
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            max-height: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background-color: #4A90E2;
+            padding: 10px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header .chatbot-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .chatbot-header .minimize-btn {
+            background-color: transparent;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .chatbot-content {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .chatbot-footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: right;
+        }
+
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .question-btn {
+            background-color: #f1f1f1;
+            color: #333;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .question-btn:hover {
+            background-color: #d1e7fd;
+        }
+
+        .question-btn:focus {
+            background-color: #4A90E2;
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body class="text-center bg-gray-50">
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+     </style>
+</head>
+
+<body class="text-center bg-gray-50">
+    <nav class="relative px-4 py-4 flex justify-between items-center bg-white">
+		<a class="text-3xl font-bold leading-none" href="#">
+			<img src="https://img.etimg.com/thumb/msid-45451298,width-480,height-360,imgsize-156251,resizemode-75/11-women-safety-secured.jpg"
+                    alt="Women Safety Logo" class="w-12 h-12 rounded-full">
+                    <div class="text-2xl font-bold">Women Safety Analytics</div>
+		</a>
+		<div class="lg:hidden">
+			<button class="navbar-burger flex items-center text-blue-600 p-3">
+				<svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<title>Mobile menu</title>
+					<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+				</svg>
+			</button>
+		</div>
+		<ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+			<li><a class="text-sm  text-blue-600 hover:text-gray-500 " href="#">Home</a></li>
+			<li class="text-gray-300">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+				</svg>
+			</li>
+			<li><a class="text-sm text-gray-400 font-bold" href="#">About Us</a></li>
+			<li class="text-gray-300">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+				</svg>
+			</li>
+			<li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">contacts us</a></li>
+			<li class="text-gray-300">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+				</svg>
+			</li>
+			
+			
+			
+		</ul>
+		<a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="#">Login</a>
+		<a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Register</a>
+	</nav>
+	<div class="navbar-menu relative z-50 hidden hum">
+		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+		<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+			<div class="flex items-center mb-8">
+				<a class="mr-auto text-3xl font-bold leading-none" href="#">
+					<img src="https://img.etimg.com/thumb/msid-45451298,width-480,height-360,imgsize-156251,resizemode-75/11-women-safety-secured.jpg"
+                    alt="Women Safety Logo" class="w-12 h-12 rounded-full">
+				</a>
+				<button class="navbar-close">
+					<svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</button>
+			</div>
+			<div>
+				<ul>
+					<li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Home</a>
+					</li>
+					<li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">About Us</a>
+					</li>
+					<li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Contacts Us</a>
+					</li>
+					<li class="mb-1">
+						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Login/Register</a>
+					</li>
+					
+				</ul>
+			</div>
+			<div class="mt-auto">
+				<div class="pt-6">
+					<a class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" href="#">Login</a>
+					<a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Register</a>
+				</div>
+				<p class="my-4 text-xs text-center text-gray-400">
+					<span>Copyright © 2024</span>
+				</p>
+			</div>
+		</nav>
+	</div>
+    <header class="pt-20 pb-12 bg-gray-100">
+        <h1 class="text-4xl font-bold mb-6">Emergency Help Needed?</h1>
+        <button
+            class="bg-red-600 rounded-full h-32 w-32 m-8 font-bold text-white text-2xl hover:bg-red-500 transform hover:scale-110 transition duration-200 ease-in-out shadow-lg hover:shadow-xl" id='sos-btn'>
+            SOS
+        </button>
+        <h3 class="text-lg text-gray-700 font-semibold">Press the button to send SOS</h3>
+    </header>
+    <section class="py-10">
+        <ul class="flex flex-wrap justify-center gap-8">
+            <li class="text-center">
+                <i
+                    class="fa-solid fa-building-shield text-2xl rounded-full bg-slate-200 h-16 w-16 grid place-content-center cursor-pointer"></i>
+                <p class="font-bold mt-2">Helpline <br> 112</p>
+            </li>
+            <li class="text-center">
+                <i
+                    class="fa-solid fa-location-dot text-2xl rounded-full bg-slate-200 h-16 w-16 grid place-content-center cursor-pointer"></i>
+                <p class="font-bold mt-2">Location</p>
+            </li>
+            <li class="text-center">
+                <i
+                    class="fa-solid fa-user-group text-2xl rounded-full bg-slate-200 h-16 w-16 grid place-content-center cursor-pointer"></i>
+                <p class="font-bold mt-2">Nearby <br> Help</p>
+            </li>
+            <li class="text-center">
+                <i class="fa-solid fa-user text-2xl rounded-full bg-slate-200 h-16 w-16 grid place-content-center cursor-pointer" id="detect-person"></i>
+            <p class="font-bold mt-2 cursor-pointer baio">Detect Person</p>
+        
+            </li>
+            
+            <li class="text-center flex flex-col">
+                <i
+                    class="fa-solid fa-user text-2xl rounded-full bg-slate-200 h-16 w-16 grid place-content-center cursor-pointer"></i>
+                <a href="/sujan" class="font-bold mt-2">Form</a>
+            </li>
+        </ul>
+    </section>
+    <section id="about-us" class="py-10 px-6 md:px-12 bg-gray-100">
+        <h2 class="text-3xl font-bold mb-6">About Women Safety</h2>
+        <p class="text-lg text-gray-700 mb-6">
+            Women's safety is a critical issue globally. In today's world, it is imperative to create safer environments
+            for women,
+            both online and offline. Empowering women to feel secure and confident is key, and this can be achieved
+            through the
+            use of modern technologies, data-driven analytics, and continuous vigilance. Our platform is committed to
+            leveraging
+            technology to offer protection and real-time safety alerts, helping women feel safer in public spaces.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp_lb6HmCbVe3iNt6ZVhzY7DXJzkE1Q-YiKg&s"
+                alt="Women Safety Image 1" class="w-full h-64 object-cover rounded-lg shadow-lg">
+            <img src="https://www.businessofapps.com/wp-content/uploads/2022/11/cover_emezintech_women_safety.jpeg"
+                alt="Women Safety Image 2" class="w-full h-64 object-cover rounded-lg shadow-lg">
+            <img src="https://i.poweredtemplates.com/p/sp/83297/sp_slide_h_3.jpg" alt="Women Safety Image 3"
+                class="w-full h-64 object-cover rounded-lg shadow-lg">
+        </div>
+    </section>
+    <footer class="bg-gray-800 text-white p-6 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-lg">© 2024 Women Safety Analytics. All rights reserved.</p>
+            <p><a href="#about-us" class="hover:text-red-400">About Us</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Burger menus
+        document.addEventListener('DOMContentLoaded', function() {
+            // open
+            const burger = document.querySelectorAll('.navbar-burger');
+            const menu = document.querySelectorAll('.navbar-menu');
+        
+            if (burger.length && menu.length) {
+                for (var i = 0; i < burger.length; i++) {
+                    burger[i].addEventListener('click', function() {
+                        for (var j = 0; j < menu.length; j++) {
+                            menu[j].classList.toggle('hidden');
+                        }
+                    });
+                }
+            }
+        
+            // close
+            const close = document.querySelectorAll('.navbar-close');
+            const backdrop = document.querySelectorAll('.navbar-backdrop');
+        
+            if (close.length) {
+                for (var i = 0; i < close.length; i++) {
+                    close[i].addEventListener('click', function() {
+                        for (var j = 0; j < menu.length; j++) {
+                            menu[j].classList.toggle('hidden');
+                        }
+                    });
+                }
+            }
+        
+            if (backdrop.length) {
+                for (var i = 0; i < backdrop.length; i++) {
+                    backdrop[i].addEventListener('click', function() {
+                        for (var j = 0; j < menu.length; j++) {
+                            menu[j].classList.toggle('hidden');
+                        }
+                    });
+                }
+            }
+        });
+        </script>
+        
+        
+    <script>
+        document.getElementById('sos-btn').addEventListener('click', async function () {
+            // Get user's location
+            const location = await getLocation();
+            const voiceBlob = await recordVoice();
+
+            // Send voice and location data to backend
+            const formData = new FormData();
+            formData.append('latitude', location.latitude);
+            formData.append('longitude', location.longitude);
+            formData.append('voice', voiceBlob);
+
+            // Send the data to the server
+            fetch('/send-sos', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+              .then(data => alert(data.message))
+              .catch(err => console.error(err));
+        });
+
+        // Function to get the user's location
+        async function getLocation() {
+            return new Promise((resolve, reject) => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        resolve({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        });
+                    }, reject);
+                } else {
+                    reject(new Error("Geolocation is not supported by this browser."));
+                }
+            });
+        }
+
+        // Function to record voice
+        async function recordVoice() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            let chunks = [];
+
+            mediaRecorder.start();
+            setTimeout(() => mediaRecorder.stop(), 5000); // Record for 5 seconds
+
+            mediaRecorder.ondataavailable = (e) => {
+                chunks.push(e.data);
+            };
+
+            return new Promise((resolve) => {
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' });
+                    resolve(blob);
+                };
+            });
+        }
+    </script>
+    
+</body>
+</html>
+    <!-- Chatbot Trigger Button -->
+    <button class="chatbot-toggle" id="chatbot-toggle">
+        <i class="fa fa-comments"></i>
+    </button>
+
+    <!-- Chatbot Interface -->
+    <div class="chatbot" id="chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-title">Women Safety Chatbot</div>
+            <button class="minimize-btn" id="minimize-chatbot">&minus;</button>
+        </div>
+        <div class="chatbot-content" id="chatbot-content">
+            <p><strong>Select a Question:</strong></p>
+            <div id="question-list">
+                <p><button class="question-btn" data-answer="In case of an emergency, press the SOS button or call 112 for immediate assistance.">What should I do in an emergency?</button></p>
+                <p><button class="question-btn" data-answer="Our platform offers real-time location sharing, nearby help detection, and voice recording for emergencies.">How does this platform help me stay safe?</button></p>
+                <p><button class="question-btn" data-answer="You can register through the Login/SignUp button on the homepage.">How can I register on this platform?</button></p>
+                <p><button class="question-btn" data-answer="Yes, your location is shared only during an SOS activation to notify your trusted contacts.">Is my location shared when I press SOS?</button></p>
+                <p><button class="question-btn" data-answer="You can access emergency helplines, location-based services, and nearby help features in our platform.">What features does this platform offer?</button></p>
+                <p><button class="question-btn" data-answer="Yes, it allows sharing your location with trusted contacts and sends alerts to them in case of emergency.">Can I share my location with friends or family?</button></p>
+                <p><button class="question-btn" data-answer="You can manually press the SOS button, or the app can detect emergencies through voice recognition and trigger alerts automatically.">How does the app detect emergencies?</button></p>
+            </div>
+        </div>
+        <div class="chatbot-footer">
+            <button id="chatbot-reset" class="bg-red-400 px-3 py-1 rounded-md text-white">Reset Chat</button>
+        </div>
+    </div>
+
+    <!-- Rest of your website content -->
+    <nav class="bg-gray-800 p-4 text-white">
+        <!-- Navigation content here -->
+    </nav>
+    <header class="pt-20 pb-12 bg-gray-100">
+        <!-- Header content here -->
+    </header>
+
+    <!-- Chatbot Script -->
+    <script>
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbot = document.getElementById('chatbot');
+        const content = document.getElementById('chatbot-content');
+        const chatbotReset = document.getElementById('chatbot-reset');
+        const questionList = document.getElementById('question-list');
+        const minimizeChatbot = document.getElementById('minimize-chatbot');
+
+        // Toggle chatbot visibility
+        chatbotToggle.addEventListener('click', () => {
+            chatbot.style.display = chatbot.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Minimize chatbot
+        minimizeChatbot.addEventListener('click', () => {
+            chatbot.style.display = 'none';
+        });
+
+        // Function to attach event listeners to question buttons
+        function attachQuestionListeners() {
+            const questionButtons = document.querySelectorAll('.question-btn');
+            questionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const answer = button.getAttribute('data-answer');
+                    content.innerHTML += `<p><strong>User:</strong> ${button.textContent}</p>`;
+                    content.innerHTML += `<p><strong>Chatbot:</strong> ${answer}</p>`;
+                    content.scrollTop = content.scrollHeight; // Scroll to bottom
+                });
+            });
+        }
+
+        // Initial attachment of question listeners
+        attachQuestionListeners();
+
+        // Handle chatbot reset
+        chatbotReset.addEventListener('click', () => {
+            content.innerHTML = `
+                <p><strong>Select a Question:</strong></p>
+            `;
+            content.appendChild(questionList);
+            attachQuestionListeners(); // Reattach listeners after resetting chat
+            content.scrollTop = content.scrollHeight;
+        });
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const detectPersonButton = document.getElementById('detect-person');
+            if (detectPersonButton) {
+                detectPersonButton.addEventListener('click', async () => {
+                    try {
+                        // Start video recording
+                        const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                        const mediaRecorder = new MediaRecorder(mediaStream);
+                        const chunks = [];
+
+                        mediaRecorder.ondataavailable = (event) => {
+                            chunks.push(event.data);
+                        };
+
+                        mediaRecorder.onstop = async () => {
+                            const videoBlob = new Blob(chunks, { type: 'video/webm' });
+                            const videoFile = new File([videoBlob], 'video.webm');
+
+                            // Create FormData object
+                            const formData = new FormData();
+                            formData.append('video', videoFile);
+
+                            // Send video to the server
+                            const response = await fetch('/send_video', {
+                                method: 'POST',
+                                body: formData
+                            });
+
+                            const result = await response.json();
+                            if (response.ok) {
+                                alert('Video successfully sent.');
+                            } else {
+                                alert('Error sending video: ' + result.message);
+                            }
+                        };
+
+                        mediaRecorder.start();
+
+                        // Stop recording after a fixed duration
+                        setTimeout(() => {
+                            mediaRecorder.stop();
+                            mediaStream.getTracks().forEach(track => track.stop()); // Stop all media tracks
+                        }, 10000); // Record for 10 seconds (adjust as needed)
+
+                    } catch (error) {
+                        console.error('Error recording video:', error);
+                    }
+                });
+            } else {
+                console.error('Element with ID "detect-person" not found.');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            height: 100%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: inset(10px 5px 5px rgb(87, 87, 87));
+        }
+
+        h2 {
+            text-align: center;
+            color: #fffafa;
+            background-color: #c25555;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 5px;
+            box-shadow: 10px 5px 5px rgb(10, 10, 10);
+
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            border-color: #c25555;
+            box-shadow: 10px 5px 5px rgb(10, 10, 10);
+        }
+
+        textarea {
+            height: 100px;
+            border-color: #c25555;
+            width: 96%;
+        }
+
+        button {
+            background-color: #c25555;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 10px 5px 5px rgb(10, 10, 10);
+        }
+
+        button:hover {
+            background-color: #9f1111;
+        }
+
+        #incidentDateTime,
+        #numMales,
+        #numFemales,
+        #location {
+            width: 100%;
+        }
+
+        .one,
+        .two {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Women Safety Incident Form</h2>
+        <form id="safetyForm" onsubmit="submitForm(event)">
+            <div class="one">
+                <label for="incidentDateTime">Date and Time of Incident</label>
+                <input type="datetime-local" id="incidentDateTime">
+
+                <label for="location">Location of Incident</label>
+                <input type="text" id="location" placeholder="Enter location">
+            </div>
+            <div class="two">
+                <label for="numMales">No. of Males Present</label>
+                <input type="number" id="numMales" placeholder="Enter number" min="0" required>
+
+                <label for="numFemales">No. of Females Present</label>
+                <input type="number" id="numFemales" placeholder="Enter number" min="0" required>
+
+                <button type="button" onclick="checkSafety()">Check Safety</button>
+            </div>
+            <br>
+            <ul id="alertList"></ul>
+            <br>
+
+            <label for="description">Names/Descriptions of Individuals Involved (if known)</label>
+            <textarea id="description" placeholder="Provide details"></textarea>
+
+            <label for="eventDetails">Description of the Event</label>
+            <textarea id="eventDetails" placeholder="Describe the event"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const dateTime = document.getElementById('incidentDateTime').value;
+            const location = document.getElementById('location').value;
+            const numMales = document.getElementById('numMales').value;
+            const numFemales = document.getElementById('numFemales').value;
+            const description = document.getElementById('description').value;
+            const eventDetails = document.getElementById('eventDetails').value;
+
+            // Check if all required fields are filled
+            if (dateTime && location && numMales && numFemales && eventDetails) {
+                // Create the form data object
+                const formData = {
+                    dateTime: dateTime,
+                    location: location,
+                    numMales: numMales,
+                    numFemales: numFemales,
+                    description: description,
+                    eventDetails: eventDetails,
+                };
+
+                // Convert the form data to JSON
+                const jsonData = JSON.stringify(formData);
+
+                // Display the JSON data in the console
+                console.log('Form Data in JSON format:', jsonData);
+
+                // Optional: Show a success message
+                alert('Form submitted successfully! Check console for JSON data.');
+
+                // Reset the form after submission
+                document.getElementById('safetyForm').reset();
+            } else {
+                alert('Please fill out all required fields.');
+            }
+        }
+
+        function checkSafety() {
+            const numMales = parseInt(document.getElementById('numMales').value, 10);
+            const numFemales = parseInt(document.getElementById('numFemales').value, 10);
+            const alertList = document.getElementById('alertList');
+
+            let alertMessage;
+
+            if (numFemales === 1 && numMales > 0) {
+                alertMessage = 'A lone woman is surrounded by men. Alert law enforcement immediately!';
+            } else if (numFemales === 1 && numMales === 0) {
+                alertMessage = 'A lone woman detected at night. Stay alert and monitor closely!';
+            } else if (numFemales === 0) {
+                alertMessage = 'No women detected in the area.';
+            } else {
+                alertMessage = 'No immediate safety concerns detected.';
+            }
+
+            alertList.innerHTML = <li>${alertMessage}</li>;
+        }
+    </script>
+
+</body>
+
+</html>
